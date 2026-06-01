@@ -23,9 +23,9 @@
                         <th class="fw-medium py-3">Personnage</th>
                         <th class="fw-medium py-3">Type</th>
                         <th class="fw-medium py-3">Caste</th>
-                        <th class="fw-medium py-3">Savoir</th>
-                        <th class="fw-medium py-3">Intelligence</th>
-                        <th class="fw-medium py-3">Force</th>
+                        <th class="fw-medium py-3" style="width:15%">Savoir</th>
+                        <th class="fw-medium py-3" style="width:15%">Intelligence</th>
+                        <th class="fw-medium py-3" style="width:15%">Force</th>
                         <th class="fw-medium py-3">Créé le</th>
                         <th class="fw-medium py-3">Modifié le</th>
                         <th class="py-3"></th>
@@ -48,26 +48,26 @@
                             <td class="text-secondary small">{{ character.caste }}</td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:44px">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
                                         <div class="progress-bar bg-dark" style="width: {{ character.knowledge }}%"></div>
                                     </div>
-                                    <span class="small font-monospace {{ character.knowledge >= 80 ? 'fw-bold text-dark' : (character.knowledge <= 35 ? 'text-secondary' : '') }}">{{ character.knowledge }}</span>
+                                    <span class="small font-monospace">{{ character.knowledge }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:44px">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
                                         <div class="progress-bar bg-dark" style="width: {{ character.intelligence }}%"></div>
                                     </div>
-                                    <span class="small font-monospace {{ character.intelligence >= 80 ? 'fw-bold text-dark' : (character.intelligence <= 35 ? 'text-secondary' : '') }}">{{ character.intelligence }}</span>
+                                    <span class="small font-monospace">{{ character.intelligence }}</span>
                                 </div>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:44px">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
                                         <div class="progress-bar bg-dark" style="width: {{ character.strength }}%"></div>
                                     </div>
-                                    <span class="small font-monospace {{ character.strength >= 80 ? 'fw-bold text-dark' : (character.strength <= 35 ? 'text-secondary' : '') }}">{{ character.strength }}</span>
+                                    <span class="small font-monospace">{{ character.strength }}</span>
                                 </div>
                             </td>
                             <td class="text-secondary small">{{ character.creation ? character.creation|date('d/m/y') : '—' }}</td>
