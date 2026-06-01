@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ character.name }}{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-5">
+        <div class="row">
+            <div class="col-6 offset-3">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div class="text-uppercase text-secondary fw-medium mb-1" style="font-size:11px;letter-spacing:.12em">Fiche personnage</div>
+                        <h1 class="h3 fw-bold mb-0">{{ character.name }}</h1>
+                        <div class="text-secondary small">{{ character.surname }}</div>
+                    </div>
+                    {% if character.kind == 'Dame' %}
+                        <strong><span class="badge bg-dark rounded-pill px-3 py-2">{{ character.kind }}</span></strong>
+                    {% else %}
+                        <span class="badge bg-light text-secondary border rounded-pill px-3 py-2">{{ character.kind }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="card border rounded-4 overflow-hidden shadow-sm">
+                    <table class="table table-hover align-middle mb-0">
+                        <tbody>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em;width:42%">Slug</th>
+                            <td class="small font-monospace text-secondary pe-4">{{ character.slug }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Caste</th>
+                            <td class="small pe-4">{{ character.caste }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Savoir</th>
+                            <td class="pe-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px"><div class="progress-bar bg-dark" style="width: {{ character.knowledge }}%"></div></div>
+                                    <span class="small font-monospace {{ character.knowledge >= 80 ? 'fw-bold' : (character.knowledge <= 35 ? 'text-secondary' : '') }}">{{ character.knowledge }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Intelligence</th>
+                            <td class="pe-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px"><div class="progress-bar bg-dark" style="width: {{ character.intelligence }}%"></div></div>
+                                    <span class="small font-monospace {{ character.intelligence >= 80 ? 'fw-bold' : (character.intelligence <= 35 ? 'text-secondary' : '') }}">{{ character.intelligence }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Force</th>
+                            <td class="pe-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px"><div class="progress-bar bg-dark" style="width: {{ character.strength }}%"></div></div>
+                                    <span class="small font-monospace {{ character.strength >= 80 ? 'fw-bold' : (character.strength <= 35 ? 'text-secondary' : '') }}">{{ character.strength }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Image</th>
+                            <td class="small text-secondary pe-4">{{ character.image }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Créé le</th>
+                            <td class="small text-secondary pe-4">{{ character.creation ? character.creation|date('d/m/Y H:i:s') : '—' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-uppercase text-secondary fw-medium ps-4 py-3" style="font-size:11px;letter-spacing:.06em">Modifié le</th>
+                            <td class="small text-secondary pe-4">{{ character.modification ? character.modification|date('d/m/Y H:i:s') : '—' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <a href="{{ path('app_character_index') }}" class="btn btn-link btn-sm text-secondary text-decoration-none px-0">← Retour à la liste</a>
+                    <div class="d-flex gap-2 align-items-center">
+                        <a href="{{ path('api_character_edit', {'identifier': character.identifier}) }}" class="btn btn-outline-dark btn-sm rounded-3 px-3">éditer</a>
+                        {{ include('character/_delete_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

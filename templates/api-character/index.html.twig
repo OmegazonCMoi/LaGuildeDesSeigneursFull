@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnages{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-5">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <div class="text-uppercase text-secondary fw-medium mb-1" style="font-size:11px;letter-spacing:.12em">Bestiaire</div>
+                <h1 class="h3 fw-bold mb-0 d-flex align-items-center gap-2">
+                    Personnages
+                    <span class="badge bg-secondary-subtle text-secondary rounded-pill fw-medium" style="font-size:11px">{{ characters|length }}</span>
+                </h1>
+            </div>
+            <a href="{{ path('app_character_new') }}" class="btn btn-dark btn-sm rounded-3 px-3">+ Créer</a>
+        </div>
+
+        <div class="card border rounded-4 overflow-hidden shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="border-bottom">
+                    <tr class="text-uppercase text-secondary" style="font-size:11px;letter-spacing:.06em">
+                        <th class="fw-medium py-3">Personnage</th>
+                        <th class="fw-medium py-3">Type</th>
+                        <th class="fw-medium py-3">Caste</th>
+                        <th class="fw-medium py-3" style="width:15%">Savoir</th>
+                        <th class="fw-medium py-3" style="width:15%">Intelligence</th>
+                        <th class="fw-medium py-3" style="width:15%">Force</th>
+                        <th class="fw-medium py-3">Créé le</th>
+                        <th class="fw-medium py-3">Modifié le</th>
+                        <th class="py-3"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for character in characters %}
+                        <tr>
+                            <td>
+                                <div class="fw-medium small">{{ character.name }}</div>
+                                <div class="text-secondary" style="font-size:11px">{{ character.surname }}</div>
+                            </td>
+                            <td>
+                                {% if character.kind == 'Dame' %}
+                                    <strong><span class="badge bg-dark rounded-pill px-2">{{ character.kind }}</span></strong>
+                                {% else %}
+                                    <span class="badge bg-light text-secondary border rounded-pill px-2">{{ character.kind }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-secondary small">{{ character.caste }}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
+                                        <div class="progress-bar bg-dark" style="width: {{ character.knowledge }}%"></div>
+                                    </div>
+                                    <span class="small font-monospace">{{ character.knowledge }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
+                                        <div class="progress-bar bg-dark" style="width: {{ character.intelligence }}%"></div>
+                                    </div>
+                                    <span class="small font-monospace">{{ character.intelligence }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" role="progressbar" style="height:4px;min-width:60px">
+                                        <div class="progress-bar bg-dark" style="width: {{ character.strength }}%"></div>
+                                    </div>
+                                    <span class="small font-monospace">{{ character.strength }}</span>
+                                </div>
+                            </td>
+                            <td class="text-secondary small">{{ character.creation ? character.creation|date('d/m/y') : '—' }}</td>
+                            <td class="text-secondary small">{{ character.modification ? character.modification|date('d/m/y') : '—' }}</td>
+                            <td class="text-nowrap">
+                                <a href="{{ path('app_character_show', {'id': character.id}) }}" class="btn btn-link btn-sm text-secondary text-decoration-none px-2">voir</a>
+                                <a href="{{ path('app_character_edit', {'id': character.id}) }}" class="btn btn-link btn-sm text-secondary text-decoration-none px-2">éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9" class="text-center text-secondary small py-5">Aucun personnage trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
