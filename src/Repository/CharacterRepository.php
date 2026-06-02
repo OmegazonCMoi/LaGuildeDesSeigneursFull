@@ -16,20 +16,19 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
-//    /**
-//     * @return Character[] Returns an array of Character objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Character[] Returns an array of Character objects
+     */
+    public function findByLife(int $life): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.life >= :life')
+            ->setParameter('life', $life)
+            ->orderBy('c.life', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Character
 //    {

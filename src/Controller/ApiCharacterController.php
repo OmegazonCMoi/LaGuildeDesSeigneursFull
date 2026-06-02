@@ -34,8 +34,8 @@ final class ApiCharacterController extends AbstractController
         ]);
     }
 
-    #[Route('/life/{life}', name: 'api_character_level', methods: ['GET'])]
-    public function level(Request $request, int $life): Response
+    #[Route('/life/{life}', name: 'api_character_life', methods: ['GET'])]
+    public function life(Request $request, int $life): Response
     {
         $response = $this->client->request(
             'GET',
