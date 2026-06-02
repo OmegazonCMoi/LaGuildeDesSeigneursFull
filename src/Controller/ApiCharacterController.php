@@ -34,6 +34,22 @@ final class ApiCharacterController extends AbstractController
         ]);
     }
 
+    #[Route('/life/{life}', name: 'api_character_level', methods: ['GET'])]
+    public function level(Request $request, int $life): Response
+    {
+        $response = $this->client->request(
+            'GET',
+            $this->getParameter('app.api_url') . '/characters/life/' . $life,
+            [
+                'auth_bearer' => $request->getSession()->get('token')
+            ]
+        );
+
+        return $this->render('api-character/index.html.twig', [
+            'characters' => $response->toArray(),
+        ]);
+    }
+
     #[Route('/new', name: 'api_character_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {

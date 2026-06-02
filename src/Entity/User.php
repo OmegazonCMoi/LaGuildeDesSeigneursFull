@@ -130,6 +130,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $data;
     }
 
+    public function __unserialize(array $data): void
+    {
+        $this->id = $data["\0".self::class."\0id"];
+        $this->email = $data["\0".self::class."\0email"];
+        $this->roles = $data["\0".self::class."\0roles"];
+        $this->password = $data["\0".self::class."\0password"];
+        $this->creation = $data["\0".self::class."\0creation"];
+        $this->modification = $data["\0".self::class."\0modification"];
+        $this->isVerified = $data["\0".self::class."\0isVerified"];
+        $this->characters = $data["\0".self::class."\0characters"] ?? new ArrayCollection();
+    }
+
     #[\Deprecated]
     public function eraseCredentials(): void
     {
